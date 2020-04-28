@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.set("view engine", "ejs")
 
@@ -13,9 +15,18 @@ app.get('/home', function(req, res){
     res.render('home');
 });
 
-app.get('/page1', function(req, res){
-    res.render('page1');
+app.get('/friends', function(req, res){
+    var friends = ["czeslaw", "mietek", "maniek"];
+    res.render('friends', {friends: friends});
 });
+// -------------------------------------------
+// POST ROUTE 
+// -----------------------------------------------
+
+app.post("/addfriend", function(req, res){
+    var newFriend = req.body.newfriend;
+    res.send("udalo ci sie wyslac date")
+})
 
 
 
